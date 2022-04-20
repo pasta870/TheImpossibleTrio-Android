@@ -1288,7 +1288,14 @@ class PlayState extends MusicBeatState
 
 		Conductor.safeZoneOffset = (ClientPrefs.safeFrames / 60) * 1000;
 		callOnLuas('onCreatePost', []);
-		
+
+		//on Playstate.hx after all
+	//obj.camera = ...
+	//add
+                #if android
+	        addAndroidControls();
+                #end
+
 		super.create();
 	}
 
