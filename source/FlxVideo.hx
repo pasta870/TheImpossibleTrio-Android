@@ -7,6 +7,9 @@ import openfl.media.Video;
 import openfl.events.Event;
 import vlc.VlcBitmap;
 #end
+#elseif android
+import extension.videoview.VideoView;
+import android.AndroidTools;
 import flixel.FlxBasic;
 import flixel.FlxG;
 
@@ -48,6 +51,15 @@ class FlxVideo extends FlxBasic {
 
 		#elseif desktop
 		// by Polybius, check out PolyEngine! https://github.com/polybiusproxy/PolyEngine
+
+                #elseif android
+
+                VideoView.playVideo(AndroidTools.getFileUrl(name));
+                VideoView.onCompletion = function(){
+		        if (finishCallback != null){
+			        finishCallback();
+		        }
+                }
 
 		vlcBitmap = new VlcBitmap();
 		vlcBitmap.set_height(FlxG.stage.stageHeight);
